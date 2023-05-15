@@ -10,7 +10,7 @@ def hello_world():
     return redirect(url_for("index"))
 
 @app.route("/index")
-def gasCompare():
+def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
