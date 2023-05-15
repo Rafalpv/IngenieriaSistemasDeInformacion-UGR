@@ -12,7 +12,7 @@ def hello_world():
 
 @app.route("/index")
 def gasCompare():
-    precios = listaPrecios()
+    #precios = listaPrecios()
     return render_template("index.html", precios=precios)
 
 if __name__ == "__main__":
