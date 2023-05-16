@@ -1,13 +1,14 @@
 import os 
 from flask import Flask, render_template, redirect, url_for
+from preciogasolina import listaPrecios
 
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    name = os.environ.get("NAME", "World")
-    return redirect(url_for("index"))
+    precios = listaPrecios()
+    return redirect(url_for("index",precios=precios))
 
 @app.route("/index")
 def index():
