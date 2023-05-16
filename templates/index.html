@@ -7,6 +7,8 @@
   <body>
     <h1>Comparador Precio Gasolina</h1>  
     <h2>Gasolineras en Granada : </h2>
-    <p>{{precios_web}}</p>
+      {% for precio_web in precios %}
+      <li>{{ precio }}</li>
+      {% endfor %}
   </body>
 </html>
