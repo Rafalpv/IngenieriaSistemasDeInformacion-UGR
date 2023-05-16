@@ -7,8 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    precios = listaPrecios()
-    return redirect(url_for("index",precios=precios))
+    return redirect(url_for("index"))
 
 @app.route("/index")
 def index():
