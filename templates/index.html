@@ -2,13 +2,10 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>GasoCompare</title>
+    <title>GasCompare</title>
   </head>
   <body>
     <h1>Comparador Precio Gasolina</h1>  
     <h2>Gasolineras en Granada : </h2>
-    {% for precio in precios %}
-    <li>{{ precio }}</li>
-    {% endfor %}
   </body>
 </html>
