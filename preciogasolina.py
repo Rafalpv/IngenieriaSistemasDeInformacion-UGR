@@ -6,6 +6,14 @@ def listaPrecios():
     response = requests.get(url)
     content = response.content
     soup = BeautifulSoup(content, 'html.parser')
-    prices = soup.find_all('mark')
+    prices_aux = soup.find_all('mark')
+    prices = []
+
+    for p in prices_aux:
+        prices.append(p.text)
 
     return prices
+
+
+
+

@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>GasCompare</title>
-  </head>
-  <body>
-    <h1>Comparador Precio Gasolina</h1>  
-    <h2>Gasolineras en Granada : </h2>
-      {% for precio_web in precios %}
-      <li>{{ precio }}</li>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>GasCompare</title>
+</head>
+
+<body>
+  <h1 id="titulo-principal">Comparador Precio Gasolina</h1>
+  <main>
+    <h2>Gasolineras en Granada:</h2>
+    <table>
+      <tbody>
+        {% for p in precios_web %}
+        <tr>
+          <td>{{ p }}</td>
+          <td>{{ p }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table>
+      <tr>
+        <th>Combustible</th>
+        <th>Hoy</th>
+        <th>Ayer</th>
+        <th>Máx. Histórico</th>
+      </tr>
+      {% for index in range(0, nombresCombustibles_web|length) %}
+      <tr>
+        <td>{{ nombresCombustibles_web[index] }}</td>
+        {% for i in range(index*3, index*3+3) %}
+        {% if i < preciosSpain_web|length %} <td class="precio font-dsdigital">
+          <strong>{{ preciosSpain_web[i] }}</strong>
+          </td>
+          {% else %}
+          <td></td>
+          {% endif %}
+          {% endfor %}
+      </tr>
       {% endfor %}
-  </body>
+    </table>
+
+  </main>
+
+</body>
+
 </html>
