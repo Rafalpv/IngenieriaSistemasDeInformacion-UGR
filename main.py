@@ -1,7 +1,6 @@
 import os 
 from flask import Flask, render_template, redirect, url_for, request
-from preciogasolina import listaPrecios 
-from precioGasolinaSpain import listaPreciosGasolinaSpain, listaNombreCombustibles
+from precioGasolinaSpain import listaPreciosGasolinaSpain, listaNombreCombustibles, fecha
 
 app = Flask(__name__)
 
@@ -12,10 +11,10 @@ def hello_world():
 
 @app.route("/index")
 def index():
-    precios = listaPrecios()
     preciosSpain = listaPreciosGasolinaSpain()
     nombresCombustibles = listaNombreCombustibles()
-    return render_template("index.html",precios_web=precios, preciosSpain_web=preciosSpain, nombresCombustibles_web=nombresCombustibles)
+    fechaPrecio = fecha()
+    return render_template("index.html", preciosSpain_web=preciosSpain, nombresCombustibles_web=nombresCombustibles, fecha_web=fechaPrecio)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

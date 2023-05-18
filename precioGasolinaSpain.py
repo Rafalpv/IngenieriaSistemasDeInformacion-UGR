@@ -29,3 +29,13 @@ def listaNombreCombustibles():
     
     return tipos_combustible
 
+def fecha():
+    url = 'https://www.dieselogasolina.com/'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    div_tabla = soup.find('div',class_='tabla_resumen_precios')
+    p_element = div_tabla.find_next('p')
+    fecha = p_element.get_text()
+    
+    return fecha
