@@ -8,8 +8,9 @@
 
 <body>
   <h1 id="titulo-principal">Comparador Precio Gasolina</h1>
+  <a href="ciudades.html">Ciudades</a>
   <main>
-    <h3>{{fecha_web}}</h3>
+    <h3>{{fechaPrecio_web}}</h3>
     <table>
       <tr>
         <th>Combustible</th>
@@ -24,16 +25,48 @@
         {% if i < preciosSpain_web|length %} <td class="precio font-dsdigital">
           <strong>{{ preciosSpain_web[i] }}</strong>
           </td>
-          {% else %}
-          <td></td>
           {% endif %}
           {% endfor %}
       </tr>
       {% endfor %}
     </table>
 
-  </main>
+    <h2>Precios Medios de las Principales Marcas</h2>
 
+    <table>
+      <tbody>
+        <tr>
+          <th></th>
+          {% for imagen in imagenes_web %}
+          <td><img src="{{ imagen }}"></td>
+          {% endfor %}
+        </tr>
+
+        {% for p in preciosPorMarca_web|batch(9, '&nbsp;') %}
+        <tr>
+          {% for item in p %}
+          <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div>
+      <h1>Formulario de búsqueda de gasolineras</h1>
+      <form method="POST" action="/buscar_gasolineras">
+        <label for="provincia">Selecciona una provincia:</label>
+        <select name="provincia" id="provincia">
+          {% for provincia in provicinciasEspana_web %}
+          <option value="{{ provincia }}">{{ provincia }}</option>
+          {% endfor %}
+        </select>
+        <br>{{gasolineras}}<br>
+        <input type="submit" value="Buscar">
+      </form>
+    </div>
+    
+  </main>
 </body>
 
 </html>

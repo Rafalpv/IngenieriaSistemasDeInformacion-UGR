@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>GasCompare</title>
+</head>
+
+<body>
+  <h1>Formulario de ciudades</h1>
+
+  <a href="./index.html">Index</a>
+
+  <form action="/procesar_formulario" method="post">
+    <label for="ciudad_partida">Ciudad de Partida:</label>
+    <input type="text" id="ciudad_partida" name="ciudad_partida" required><br><br>
+
+    <label for="ciudad_destino">Ciudad de Destino:</label>
+    <input type="text" id="ciudad_destino" name="ciudad_destino" required><br><br>
+
+    <input type="submit" value="Enviar">
+  </form>
+  <div>
+    <br>{{mensaje_web}}</br>
+  </div>
+</body>
+
+</html>

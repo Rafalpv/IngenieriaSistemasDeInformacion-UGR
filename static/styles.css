@@ -8,10 +8,16 @@ body{
     font-size: 3vw;
 }
 
+a{
+    color: aliceblue;
+    text-decoration-line: none;
+}
+
 main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 78rem;
 }
 
 table {

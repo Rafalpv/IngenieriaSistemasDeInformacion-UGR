@@ -24,7 +24,6 @@ def listaNombreCombustibles():
     
     for c in combustibles:
         tipo_combustible = c.text.strip()
-        print(tipo_combustible)
         tipos_combustible.append(tipo_combustible)
     
     return tipos_combustible
@@ -39,3 +38,34 @@ def fecha():
     fecha = p_element.get_text()
     
     return fecha
+
+def preciosPorMarca():
+    url = 'https://www.dieselogasolina.com/'    
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    
+    div = soup.find("div", class_="por_marcas")
+    tbody = div.find("tbody")
+    tds = tbody.find_all("td")
+    
+    precios = []
+    for td in tds:
+        precio = td.text.strip()
+        precios.append(precio)
+        
+    return precios
+
+def imagenesGasolineras():
+    url = 'https://www.dieselogasolina.com/'    
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    div = soup.find("div", class_="por_marcas")
+    imagenes = div.find_all("img")
+
+    enlaces = []
+    for imagen in imagenes:
+        enlace = imagen["src"]
+        enlaces.append(enlace)
+
+    return enlaces
