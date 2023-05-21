@@ -13,20 +13,33 @@ a{
     text-decoration-line: none;
 }
 
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 78rem;
-}
-
 table {
     width: 70%;
     border-collapse: collapse;
-  }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table-provincias{
+    overflow-y: scroll;
+    max-height: 500px;
+    margin: 30px 0 70px 0;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
   
 td {
     border: 1px solid rgb(255, 255, 255);
     border-radius: 25%;
     padding: 10px;
 }
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #000000;
+  }

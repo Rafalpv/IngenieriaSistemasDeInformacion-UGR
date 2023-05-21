@@ -11,46 +11,49 @@
   <a href="ciudades.html">Ciudades</a>
   <main>
     <h3>{{fechaPrecio_web}}</h3>
-    <table>
-      <tr>
-        <th>Combustible</th>
-        <th>Hoy</th>
-        <th>Ayer</th>
-        <th>Máx. Histórico</th>
-      </tr>
-      {% for index in range(0, nombresCombustibles_web|length) %}
-      <tr>
-        <td>{{ nombresCombustibles_web[index] }}</td>
-        {% for i in range(index*3, index*3+3) %}
-        {% if i < preciosSpain_web|length %} <td class="precio font-dsdigital">
-          <strong>{{ preciosSpain_web[i] }}</strong>
-          </td>
-          {% endif %}
-          {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
-
-    <h2>Precios Medios de las Principales Marcas</h2>
-
-    <table>
-      <tbody>
+    <div class="container">
+      <table>
         <tr>
-          <th></th>
-          {% for imagen in imagenes_web %}
-          <td><img src="{{ imagen }}"></td>
-          {% endfor %}
+          <th>Combustible</th>
+          <th>Hoy</th>
+          <th>Ayer</th>
+          <th>Máx. Histórico</th>
         </tr>
-
-        {% for p in preciosPorMarca_web|batch(9, '&nbsp;') %}
+        {% for index in range(0, nombresCombustibles_web|length) %}
         <tr>
-          {% for item in p %}
-          <td>{{ item }}</td>
-          {% endfor %}
+          <td>{{ nombresCombustibles_web[index] }}</td>
+          {% for i in range(index*3, index*3+3) %}
+          {% if i < preciosSpain_web|length %} <td class="precio font-dsdigital">
+            <strong>{{ preciosSpain_web[i] }}</strong>
+            </td>
+            {% endif %}
+            {% endfor %}
         </tr>
         {% endfor %}
-      </tbody>
-    </table>
+      </table>
+    </div>
+
+    <h2>Precios Medios de las Principales Marcas</h2>
+    <div class="container">
+      <table>
+        <tbody>
+          <tr>
+            <th></th>
+            {% for imagen in imagenes_web %}
+            <td><img src="{{ imagen }}"></td>
+            {% endfor %}
+          </tr>
+
+          {% for p in preciosPorMarca_web|batch(9, '&nbsp;') %}
+          <tr>
+            {% for item in p %}
+            <td>{{ item }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
     <div>
       <h1>Formulario de búsqueda de gasolineras</h1>
@@ -65,7 +68,33 @@
         <input type="submit" value="Buscar">
       </form>
     </div>
-    
+    <div class="container table-provincias">
+      <table>
+        <thead>
+          <tr class="sticky-header">
+            <th>Rótulo</th>
+            <th>Municipio</th>
+            <th>Dirección</th>
+            <th>Precio Gasolina 95 E5</th>
+            <th>Precio Gasolina 98 E5</th>
+            <th>Precio Gasóleo A</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for gasolinera in gasolineasPronvincia_web %}
+          <tr>
+            <td>{{ gasolinera['Rótulo'] }}</td>
+            <td>{{ gasolinera['Municipio'] }}</td>
+            <td>{{ gasolinera['Direccion'] }}</td>
+            <td>{{ gasolinera['Precio Gasolina 95 E5'] }}</td>
+            <td>{{ gasolinera['Precio Gasolina 98 E5'] }}</td>
+            <td>{{ gasolinera['Precio Gasoleo A'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
   </main>
 </body>
 
