@@ -12,3 +12,8 @@ soupsieve==2.4.1
 urllib3==1.26.15
 Werkzeug==2.2.3
 google-api-python-client==2.11.0
+folium==0.14.0
+branca==0.6.0
+numpy==1.24.3
+geopy==2.3.0
+geographiclib==2.0
