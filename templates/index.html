@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h1 id="titulo-principal">Comparador Precio Gasolina</h1>
+  <h1 id="titulo-principal">GasCompare</h1>
   <a href="ciudades.html">Ciudades</a>
   <main>
     <h3>{{fechaPrecio_web}}</h3>
@@ -58,37 +58,41 @@
     <div>
       <h1>Formulario de búsqueda de gasolineras</h1>
       <form method="POST" action="/buscar_gasolineras">
-        <label for="provincia">Selecciona una provincia:</label>
-        <select name="provincia" id="provincia">
-          {% for provincia in provicinciasEspana_web %}
-          <option value="{{ provincia }}">{{ provincia }}</option>
-          {% endfor %}
-        </select>
-        <br>{{gasolineras}}<br>
+        <div class="formularios">
+          <label for="provincia">Selecciona una provincia</label>
+          <select name="provincia" id="seleccion-provincia">
+            {% for provincia in provicinciasEspana_web %}
+            <option value="{{ provincia }}">{{ provincia }}</option>
+            {% endfor %}
+          </select>
+          <br>{{gasolineras}}<br>
+          <label for="codigo-postal">Codigo Postal</label>
+          <input type="text" name="codigo-postal">
+        </div>
         <input type="submit" value="Buscar">
-      </form>
     </div>
+
     <div class="container table-provincias">
       <table>
         <thead>
           <tr class="sticky-header">
-            <th>Rótulo</th>
-            <th>Municipio</th>
-            <th>Dirección</th>
-            <th>Precio Gasolina 95 E5</th>
-            <th>Precio Gasolina 98 E5</th>
-            <th>Precio Gasóleo A</th>
+            <th class="rotulo">Rótulo</th>
+            <th class="municipio">Municipio</th>
+            <th class="direccion">Dirección</th>
+            <th class="gas95">Precio Gasolina 95 E5</th>
+            <th class="gas98">Precio Gasolina 98 E5</th>
+            <th class="gasA">Precio Gasóleo A</th>
           </tr>
         </thead>
         <tbody>
           {% for gasolinera in gasolineasPronvincia_web %}
           <tr>
-            <td>{{ gasolinera['Rótulo'] }}</td>
-            <td>{{ gasolinera['Municipio'] }}</td>
-            <td>{{ gasolinera['Direccion'] }}</td>
-            <td>{{ gasolinera['Precio Gasolina 95 E5'] }}</td>
-            <td>{{ gasolinera['Precio Gasolina 98 E5'] }}</td>
-            <td>{{ gasolinera['Precio Gasoleo A'] }}</td>
+            <td class="rotulo">{{ gasolinera['Rótulo'] }}</td>
+            <td class="municipio">{{ gasolinera['Municipio'] }}</td>
+            <td class="direccion">{{ gasolinera['Direccion'] }}</td>
+            <td class="gas95">{{ gasolinera['Precio Gasolina 95 E5'] }}</td>
+            <td class="gas98">{{ gasolinera['Precio Gasolina 98 E5'] }}</td>
+            <td class="gasA">{{ gasolinera['Precio Gasoleo A'] }}</td>
           </tr>
           {% endfor %}
         </tbody>

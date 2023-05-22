@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from diseslGasolina import listaPreciosGasolinaSpain, listaNombreCombustibles, fecha, preciosPorMarca, imagenesGasolineras
 from preciosAPI import filtrarPorProvincia
 from distancias import distanciaEntreCiudades
+from mapa import getMapa
 
 provincias_espana = [
     'ALBACETE', 'ALICANTE', 'ALMERÍA','ARABA/ÁLAVA', 'ASTURIAS', 'ÁVILA', 'BADAJOZ', 'BARCELONA',
@@ -46,9 +47,11 @@ def ciudades():
 def formularioCiudades():
     ciudadPartida = request.form.get('ciudad_partida')
     ciudadDestino = request.form.get('ciudad_destino')
-    
     kms = distanciaEntreCiudades(ciudadPartida,ciudadDestino)
     mensaje = "La distancia por Carretera entre " + ciudadPartida + " y " + ciudadDestino + " es de " + kms
+    
+    getMapa(ciudadPartida,ciudadDestino)
+    
     return redirect(url_for('ciudades', mensaje=mensaje))
     
 if __name__ == '__main__':

@@ -1,16 +1,30 @@
 body{
-    background-color: rgb(8, 57, 99);
-    color: white;
+    background-image: linear-gradient(to bottom right, #5f5805, #4d4c0c88);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
     text-align: center;
 }
 
 #titulo-principal{
-    font-size: 3vw;
+    font-size: 4vw;
 }
 
 a{
-    color: aliceblue;
     text-decoration-line: none;
+    font-size: 2vw;
+    color: white;
+}
+
+#seleccion-provincia{
+    padding: 7px;
+    text-align: center;
+}
+
+.formularios{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 table {
@@ -25,13 +39,23 @@ table {
 }
 
 .table-provincias{
-    overflow-y: scroll;
-    max-height: 500px;
+    /*overflow-y: scroll;
+    max-height: 500px;*/
     margin: 30px 0 70px 0;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
+}
+
+.table-provincias::-webkit-scrollbar {
+    display: none;
 }
   
+th{
+    padding: 10px;
+}  
+
+.rotulo{
+    width: 75px;
+}
+
 td {
     border: 1px solid rgb(255, 255, 255);
     border-radius: 25%;
