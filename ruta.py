@@ -44,7 +44,7 @@ def obtener_ruta(origin, destination, api_key):
                 ).add_to(mapa)
 
             # Mostrar el mapa
-            mapa.save("gasolineras_mapa.html")
+            mapa.save("templates/gasolineras_mapa.html")
         else:
             print("No se encontró una ruta válida.")
     else:
