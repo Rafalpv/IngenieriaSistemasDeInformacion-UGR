@@ -1,9 +1,9 @@
 import os 
 from flask import Flask, render_template, redirect, url_for, request
-from diseslGasolina import listaPreciosGasolinaSpain, listaNombreCombustibles, fecha, preciosPorMarca, imagenesGasolineras
+from dieselGasolina import obtenerDatosCombustibles, fecha, obtenerDatosEntidades
 from preciosAPI import filtrarPorProvincia
 from distancias import distanciaEntreCiudades
-from mapa import getMapa
+from ruta import getGasolinras
 
 provincias_espana = [
     'ALBACETE', 'ALICANTE', 'ALMERÍA','ARABA/ÁLAVA', 'ASTURIAS', 'ÁVILA', 'BADAJOZ', 'BARCELONA',
@@ -24,14 +24,12 @@ def hello_world():
 
 @app.route('/index.html')
 def index():
-    preciosSpain = listaPreciosGasolinaSpain()
-    nombresCombustibles = listaNombreCombustibles()
+    preciosCombustibles = obtenerDatosCombustibles()
     fechaPrecio = fecha()
-    listaPreciosPorMarca = preciosPorMarca()
-    imagenes = imagenesGasolineras()
+    preciosEntidades = obtenerDatosEntidades()
     provincia = request.args.get('provincia')
     gasolinerasProvincia = filtrarPorProvincia(provincia)
-    return render_template('index.html', preciosSpain_web=preciosSpain, nombresCombustibles_web=nombresCombustibles, fechaPrecio_web=fechaPrecio, preciosPorMarca_web=listaPreciosPorMarca,imagenes_web=imagenes,provicinciasEspana_web=provincias_espana,gasolineasPronvincia_web=gasolinerasProvincia)
+    return render_template('index.html', preciosCombustibles_web=preciosCombustibles, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades,provicinciasEspana_web=provincias_espana,gasolineasPronvincia_web=gasolinerasProvincia)
             
 @app.route('/buscar_gasolineras', methods=['POST'])
 def buscarGasolinerasProvincias():
@@ -41,7 +39,8 @@ def buscarGasolinerasProvincias():
 @app.route('/ciudades.html')
 def ciudades():
     mensaje = request.args.get('mensaje')
-    return render_template('ciudades.html', mensaje_web = mensaje if mensaje is not None else "")
+    gasolineras = request.args.get('gasolineras')
+    return render_template('ciudades.html', mensaje_web = mensaje if mensaje is not None else "",gasolineras_web=gasolineras)
 
 @app.route("/procesar_formulario", methods=['POST'])
 def formularioCiudades():
@@ -50,9 +49,9 @@ def formularioCiudades():
     kms = distanciaEntreCiudades(ciudadPartida,ciudadDestino)
     mensaje = "La distancia por Carretera entre " + ciudadPartida + " y " + ciudadDestino + " es de " + kms
     
-    getMapa(ciudadPartida,ciudadDestino)
+    gasolineras = getGasolinras(ciudadPartida,ciudadDestino)
     
-    return redirect(url_for('ciudades', mensaje=mensaje))
+    return redirect(url_for('ciudades', mensaje=mensaje,gasolineras=gasolineras))
     
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get('PORT', 8080)))

@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+from clases import Combustible, Entidad
+
 
 def listaPreciosGasolinaSpain(): 
     url = 'https://www.dieselogasolina.com/'
@@ -28,6 +30,22 @@ def listaNombreCombustibles():
     
     return tipos_combustible
 
+def obtenerDatosCombustibles():
+    precios = listaPreciosGasolinaSpain()
+    nombres = listaNombreCombustibles()
+
+    combustibles = []
+    for i in range(len(nombres)):
+        nombre = nombres[i]
+        precio_litro_actual = precios[i * 3]
+        precio_litro_pasado = precios[i * 3 + 1]
+        precio_litro_maxHistorico = precios[i * 3 + 2]
+
+        combustible = Combustible(nombre, precio_litro_actual, precio_litro_pasado, precio_litro_maxHistorico)
+        combustibles.append(combustible)
+        
+    return combustibles
+
 def fecha():
     url = 'https://www.dieselogasolina.com/'
     response = requests.get(url)
@@ -39,7 +57,8 @@ def fecha():
     
     return fecha
 
-def preciosPorMarca():
+
+def preciosPorEntidad():
     url = 'https://www.dieselogasolina.com/'    
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -69,3 +88,26 @@ def imagenesGasolineras():
         enlaces.append(enlace)
 
     return enlaces
+
+def obtenerDatosEntidades():
+    precios = preciosPorEntidad()
+    imagenes = imagenesGasolineras()
+    
+    entidades = []
+    
+    for i in range(len(imagenes)):
+        combustibles = []
+        imagen = imagenes[i]
+        for j in range(5):
+            nombre = precios[j*9]
+            precio = precios[(j*9)+1+i]
+            combustible = Combustible(nombre,precio,"","")
+            combustibles.append(combustible)
+            
+        entidad = Entidad(combustibles,imagen)
+        entidades.append(entidad)
+    
+    return entidades
+    
+
+obtenerDatosEntidades()

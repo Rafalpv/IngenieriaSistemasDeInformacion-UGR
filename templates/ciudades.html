@@ -8,9 +8,13 @@
 </head>
 
 <body>
-  <h1>Formulario de ciudades</h1>
-
-  <a href="./index.html">Index</a>
+  <header>
+    <h1 id="titulo-principal">GasCompare</h1>
+    <nav>
+      <a href="index.html">Indice</a>
+    </nav>
+  </header>
+  <h2>Formulario de ciudades</h2>
 
   <form action="/procesar_formulario" method="post">
     <label for="ciudad_partida">Ciudad de Partida:</label>
@@ -21,12 +25,17 @@
 
     <input type="submit" value="Enviar">
   </form>
-  <div>
-    <br>{{mensaje_web}}</br>
+  <div class="container">
+    <br class="mensaje">{{mensaje_web}}</br>
   </div>
-  
-  <h1>Mapa</h1>
-  <iframe src="../gasolineras_mapa.html" width="1000" height="600" allowfullscreen></iframe>
+
+  <h2>Gasolineras Encontradas</h2>
+  <ul>
+
+    <p>{{gasolineras_web}}</p>
+
+  </ul>
+
 </body>
 
 </html>

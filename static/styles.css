@@ -1,69 +1,126 @@
-body{
-    background-image: linear-gradient(to bottom right, #5f5805, #4d4c0c88);
-    color: rgb(255, 255, 255);
-    font-weight: 700;
-    text-align: center;
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
 }
 
-#titulo-principal{
-    font-size: 4vw;
-}
-
-a{
-    text-decoration-line: none;
-    font-size: 2vw;
-    color: white;
-}
-
-#seleccion-provincia{
-    padding: 7px;
-    text-align: center;
-}
-
-.formularios{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-table {
-    width: 70%;
-    border-collapse: collapse;
+h1,
+h2,
+h3 {
+  text-align: center;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos del encabezado */
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+#titulo-principal {
+  font-size: 5rem;
+  margin: 0;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+/* Estilos de las secciones */
+section {
+  margin-bottom: 20px;
+}
+
+h2,
+h3 {
+  font-size: 30px;
+  color: #333;
+}
+
+/* Estilos de las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #cab6b6;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Estilos del formulario de búsqueda */
+form{
+    text-align: center;
+}
+
+.formularios {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+select,
+input[type="text"] {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
 }
 
 .table-provincias{
-    /*overflow-y: scroll;
-    max-height: 500px;*/
-    margin: 30px 0 70px 0;
+    width: 100%;
+    text-align: center;
 }
 
-.table-provincias::-webkit-scrollbar {
-    display: none;
+.table-provincias th,td{
+    text-align: center;
 }
-  
-th{
-    padding: 10px;
-}  
 
+/* Estilos de las celdas de precios */
 .rotulo{
-    width: 75px;
+    width: 30px;
 }
-
-td {
-    border: 1px solid rgb(255, 255, 255);
-    border-radius: 25%;
-    padding: 10px;
-}
-
-.sticky-header {
-    position: sticky;
-    top: 0;
-    background-color: #000000;
-  }

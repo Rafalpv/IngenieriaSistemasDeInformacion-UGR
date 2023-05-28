@@ -1,5 +1,5 @@
 import requests
-import folium
+from geopy.geocoders import Nominatim
 
 def obtener_ruta(origin, destination, api_key):
     api_key = "AIzaSyAK1BA-W17qGtv78Y8UsjFkfPqcC3TUHvc"  # Tu API key de Google Maps
@@ -31,20 +31,8 @@ def obtener_ruta(origin, destination, api_key):
                 # Buscar gasolineras en las coordenadas del paso
                 buscar_gasolineras(coordenadas, api_key, gasolineras_encontradas)
 
-            # Crear un mapa centrado en la ruta
-            mapa = folium.Map(location=[steps[0]["start_location"]["lat"], steps[0]["start_location"]["lng"]], zoom_start=10)
-
-            # Agregar marcadores de gasolineras al mapa
-            for gasolinera in gasolineras_encontradas:
-                lat, lng, nombre, direccion = gasolinera
-                folium.Marker(
-                    location=[lat, lng],
-                    popup=f"Gasolinera: {nombre}<br>Dirección: {direccion}",
-                    icon=folium.Icon(color="green", icon="info-sign")
-                ).add_to(mapa)
-
-            # Mostrar el mapa
-            mapa.save("templates/gasolineras_mapa.html")
+            # Devolver las gasolineras encontradas
+            return gasolineras_encontradas
         else:
             print("No se encontró una ruta válida.")
     else:
@@ -82,3 +70,21 @@ def buscar_gasolineras(coordenadas, api_key, gasolineras_encontradas):
         # Ocurrió un error al realizar la solicitud
         print("Error en la solicitud:", response.status_code)
 
+def getGasolinras(origen,destino):
+    
+    api_key = "AIzaSyAK1BA-W17qGtv78Y8UsjFkfPqcC3TUHvc"  # Tu API key de Google Maps
+    
+    geolocator = Nominatim(user_agent="my-app")
+    city1 = origen
+    location1 = geolocator.geocode(city1)
+    latitude1, longitude1 = location1.latitude, location1.longitude
+    cords_origen = str(latitude1)+","+str(longitude1)
+
+    city2 = destino
+    location2 = geolocator.geocode(city2)
+    latitude2, longitude2 = location2.latitude, location2.longitude
+    coords_destino = str(latitude2)+","+str(longitude2)
+    
+    gasolineras_encontrada = obtener_ruta(cords_origen,coords_destino,api_key)
+    
+    return gasolineras_encontrada
