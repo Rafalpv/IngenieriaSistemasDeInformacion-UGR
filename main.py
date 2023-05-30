@@ -1,12 +1,12 @@
 import os 
 from flask import Flask, render_template, redirect, url_for, request
 from dieselGasolina import obtenerDatosCombustibles, fecha, obtenerDatosEntidades
-from preciosAPI import filtrarPorProvincia
+from preciosAPI import filtrarPorProvincia, filtrarPorCodPostal
 from distancias import distanciaEntreCiudades
 from ruta import getGasolinras
 
 provincias_espana = [
-    'ALBACETE', 'ALICANTE', 'ALMERÍA','ARABA/ÁLAVA', 'ASTURIAS', 'ÁVILA', 'BADAJOZ', 'BARCELONA',
+    '','ALBACETE', 'ALICANTE', 'ALMERÍA','ARABA/ÁLAVA', 'ASTURIAS', 'ÁVILA', 'BADAJOZ', 'BARCELONA',
     'BURGOS', 'CÁCERES', 'CÁDIZ', 'CANTABRIA', 'CASTELLÓN / CASTELLÓ', 'CEUTA', 'CIUDAD REAL', 'CÓRDOBA', 'CUENCA',
     'GIRONA', 'GRANADA', 'GUADALAJARA', 'GIPUZKOA', 'HUELVA', 'HUESCA', 'ISLAS BALEARES', 'JAÉN',
     'CORUÑA (A)', 'RIOJA (LA)', 'PALMAS (LAS)', 'LEÓN', 'LLEIDA', 'LUGO', 'MADRID', 'MÁLAGA', 'MELILLA', 'MURCIA',
@@ -28,13 +28,23 @@ def index():
     fechaPrecio = fecha()
     preciosEntidades = obtenerDatosEntidades()
     provincia = request.args.get('provincia')
-    gasolinerasProvincia = filtrarPorProvincia(provincia)
-    return render_template('index.html', preciosCombustibles_web=preciosCombustibles, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades,provicinciasEspana_web=provincias_espana,gasolineasPronvincia_web=gasolinerasProvincia)
+    codPostal = request.args.get('codPostal')
+    
+    if(provincia == ''):
+        print("CODPOSTAL")
+        gasolineras = filtrarPorCodPostal(codPostal)
+    else:
+        print("PROVINCIA")
+        gasolineras = filtrarPorProvincia(provincia)
+        
+    return render_template('index.html', preciosCombustibles_web=preciosCombustibles, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades,provicinciasEspana_web=provincias_espana,gasolineras_web=gasolineras)
             
 @app.route('/buscar_gasolineras', methods=['POST'])
 def buscarGasolinerasProvincias():
     provincia = request.form['provincia']
-    return redirect(url_for('index',provincia=provincia))
+    codPostal = request.form['codPostal']
+    
+    return redirect(url_for('index',provincia=provincia,codPostal=codPostal))
 
 @app.route('/ciudades.html')
 def ciudades():

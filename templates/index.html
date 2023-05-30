@@ -74,8 +74,8 @@
             <br>
             {{gasolineras}}
             <br>
-            <label for="codigo-postal">Codigo Postal</label>
-            <input type="text" name="codigo-postal">
+            <label for="codPostal">Codigo Postal</label>
+            <input type="text" name="codPostal">
           </div>
           <input type="submit" value="Buscar">
         </form>
@@ -95,7 +95,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for gasolinera in gasolineasPronvincia_web %}
+            {% for gasolinera in gasolineras_web %}
             <tr>
               <td>{{ gasolinera['Rótulo'] }}</td>
               <td>{{ gasolinera['Municipio'] }}</td>
