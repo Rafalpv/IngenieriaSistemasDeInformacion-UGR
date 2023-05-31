@@ -57,8 +57,11 @@ def formularioCiudades():
     ciudadPartida = request.form.get('ciudad_partida')
     ciudadDestino = request.form.get('ciudad_destino')
     kms = distanciaEntreCiudades(ciudadPartida,ciudadDestino)
-    mensaje = "La distancia por Carretera entre " + ciudadPartida + " y " + ciudadDestino + " es de " + kms
-    
+    if(kms == 'No se pudo obtener la distancia entre las ciudades'):
+        mensaje = kms
+    else:
+        mensaje = "La distancia por Carretera entre " + ciudadPartida + " y " + ciudadDestino + " es de " + kms
+   
     gasolineras = getGasolinras(ciudadPartida,ciudadDestino)
     
     return redirect(url_for('ciudades', mensaje=mensaje,gasolineras=gasolineras))
