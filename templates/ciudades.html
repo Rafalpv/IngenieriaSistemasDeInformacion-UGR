@@ -29,8 +29,12 @@
     <br class="mensaje">{{mensaje_web}}</br>
   </div>
 
+  {% if rutaCiudades_web.ciudad_partida is none or rutaCiudades_web.ciudad_destino is none %}
+  <h2>ERROR : Ciudad de Partida o Destino no especificada</h2>
+  {% else %}
   <h2>Gasolineras Encontradas entre {{rutaCiudades_web.ciudad_partida}} y {{rutaCiudades_web.ciudad_destino}}</h2>
   <div class="container">
+    {% if rutaCiudades_web.gasolineras %}
     <table class="table-provincias">
       <thead>
         <tr>
@@ -65,7 +69,12 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p>No se encontraron gasolineras.</p>
+    {% endif %}
   </div>
+  {% endif %}
+
 
 </body>
 

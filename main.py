@@ -62,8 +62,12 @@ def ciudades():
     ciudadPartida = request.args.get('ciudadPartida')
     ciudadDestino = request.args.get('ciudadDestino')
     
-    ruta = Ruta(ciudadPartida,ciudadDestino)
-    rutaCiudades = ruta.getRuta()
+    if(mensaje == 'No se pudo obtener la distancia entre las ciudades'):
+        ruta = Ruta()
+        rutaCiudades = ruta.getRuta()
+    else:
+        ruta = Ruta(ciudadPartida,ciudadDestino)
+        rutaCiudades = ruta.getRuta()
     
     return render_template('ciudades.html', mensaje_web=mensaje if mensaje is not None else "", rutaCiudades_web=rutaCiudades)
 
