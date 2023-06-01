@@ -97,12 +97,12 @@
           <tbody>
             {% for gasolinera in gasolineras_web %}
             <tr>
-              <td>{{ gasolinera['Rótulo'] }}</td>
-              <td>{{ gasolinera['Municipio'] }}</td>
-              <td>{{ gasolinera['Direccion'] }}</td>
-              <td >{{ gasolinera['Precio Gasolina 95 E5'] }}</td>
-              <td>{{ gasolinera['Precio Gasolina 98 E5'] }}</td>
-              <td>{{ gasolinera['Precio Gasoleo A'] }}</td>
+              <td>{{ gasolinera.nombre }}</td>
+              <td>{{ gasolinera.municipio }}</td>
+              <td>{{ gasolinera.ubicacion }}</td>
+              {% for combustible in gasolinera.combustibles %}
+              <td>{{ combustible.precio_litro_actual }}</td>
+              {% endfor %}
             </tr>
             {% endfor %}
           </tbody>

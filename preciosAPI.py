@@ -13,7 +13,9 @@ def filtrarPorProvincia(provincia):
     {
         "Rótulo": element['Rótulo'],
         "Municipio": element['Municipio'],
+        "codPostal": element['C.P.'],
         "Direccion": element['Dirección'],
+        "Provincia": element['Provincia'],
         "Precio Gasolina 95 E5":  element['Precio Gasolina 95 E5'],
         "Precio Gasolina 98 E5": element['Precio Gasolina 98 E5'],
         "Precio Gasoleo A": element['Precio Gasoleo A']
@@ -31,7 +33,9 @@ def filtrarPorCodPostal(codPostal):
     {
         "Rótulo": element['Rótulo'],
         "Municipio": element['Municipio'],
+        "codPostal": element['C.P.'],
         "Direccion": element['Dirección'],
+        "Provincia": element['Provincia'],
         "Precio Gasolina 95 E5":  element['Precio Gasolina 95 E5'],
         "Precio Gasolina 98 E5": element['Precio Gasolina 98 E5'],
         "Precio Gasoleo A": element['Precio Gasoleo A']

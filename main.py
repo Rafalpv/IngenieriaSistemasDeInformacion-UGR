@@ -4,6 +4,7 @@ from dieselGasolina import obtenerDatosCombustibles, fecha, obtenerDatosEntidade
 from preciosAPI import filtrarPorProvincia, filtrarPorCodPostal
 from distancias import distanciaEntreCiudades
 from ruta import getGasolineras
+from clases import *
 
 provincias_espana = [
     '', 'ALBACETE', 'ALICANTE', 'ALMERÍA', 'ARABA/ÁLAVA', 'ASTURIAS', 'ÁVILA', 'BADAJOZ', 'BARCELONA',
@@ -28,13 +29,16 @@ def index():
     preciosCombustibles = obtenerDatosCombustibles()
     fechaPrecio = fecha()
     preciosEntidades = obtenerDatosEntidades()
+    
     provincia = request.args.get('provincia')
     codPostal = request.args.get('codPostal')
 
+    gasolinerasFiltrada = Gasolinera()    
+
     if (provincia == ''):
-        gasolineras = filtrarPorCodPostal(codPostal)
+        gasolineras = gasolinerasFiltrada.getGasolinerasCodPostal(codPostal)
     else:
-        gasolineras = filtrarPorProvincia(provincia)
+        gasolineras = gasolinerasFiltrada.getGasolinerasProvincia(provincia)
 
     return render_template('index.html', preciosCombustibles_web=preciosCombustibles, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades, provicinciasEspana_web=provincias_espana, gasolineras_web=gasolineras)
 

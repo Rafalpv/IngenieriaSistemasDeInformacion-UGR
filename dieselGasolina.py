@@ -109,5 +109,3 @@ def obtenerDatosEntidades():
     
     return entidades
     
-
-obtenerDatosEntidades()
