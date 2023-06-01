@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, request
 from dieselGasolina import fecha
-from distancias import distanciaEntreCiudades
 
 from classes.Combustible import Combustible
 from classes.Gasolinera import Gasolinera
@@ -58,34 +57,23 @@ def buscarGasolinerasProvincias():
 
 @app.route('/ciudades.html')
 def ciudades():  
-    mensaje = request.args.get('mensaje')
     ciudadPartida = request.args.get('ciudadPartida')
     ciudadDestino = request.args.get('ciudadDestino')
+
+    ruta = Ruta(ciudadPartida,ciudadDestino)
+    rutaCiudades = ruta.getRuta()
+    infoRuta = ruta.informacionRuta()
     
-    if(mensaje == 'No se pudo obtener la distancia entre las ciudades'):
-        ruta = Ruta()
-        rutaCiudades = ruta.getRuta()
-    else:
-        ruta = Ruta(ciudadPartida,ciudadDestino)
-        rutaCiudades = ruta.getRuta()
-    
-    return render_template('ciudades.html', mensaje_web=mensaje if mensaje is not None else "", rutaCiudades_web=rutaCiudades)
+    return render_template('ciudades.html', infoRuta_web=infoRuta, rutaCiudades_web=rutaCiudades)
 
 
 @app.route("/procesar_formulario", methods=['POST'])
 def formularioCiudades():
+    
     ciudadPartida = request.form.get('ciudad_partida')
     ciudadDestino = request.form.get('ciudad_destino')
     
-    kms = distanciaEntreCiudades(ciudadPartida, ciudadDestino)
-    if (kms == 'No se pudo obtener la distancia entre las ciudades'):
-        mensaje = kms
-    else:
-        mensaje = "La distancia por Carretera entre " + \
-            ciudadPartida + " y " + ciudadDestino + " es de " + kms
-
-
-    return redirect(url_for('ciudades', ciudadPartida=ciudadPartida, ciudadDestino=ciudadDestino, mensaje=mensaje,))
+    return redirect(url_for('ciudades', ciudadPartida=ciudadPartida, ciudadDestino=ciudadDestino))
 
 
 if __name__ == '__main__':

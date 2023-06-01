@@ -26,7 +26,7 @@
     <input type="submit" value="Enviar">
   </form>
   <div class="container">
-    <br class="mensaje">{{mensaje_web}}</br>
+    <br class="mensaje">{{infoRuta_web}}</br>
   </div>
 
   {% if rutaCiudades_web.ciudad_partida is none or rutaCiudades_web.ciudad_destino is none %}
@@ -49,22 +49,22 @@
         <tr>
           <td>{{ gasolinera.nombre }}</td>
           <td>{{ gasolinera.direccion }}</td>
-          <td>
+          <td class="{% if gasolinera.horario %}abierto{% else %}cerrado{% endif %}" >
             {% if gasolinera.horario is none %}
-            SIN INFORMACIÓN
+              SIN INFORMACIÓN
             {% elif gasolinera.horario %}
-            ABIERTO
+              ABIERTO
             {% else %}
-            CERRADO
+              CERRADO
             {% endif %}
           </td>
-          <td>
+          <td class="{% if gasolinera.rating %}valoracion{% endif %}">
             {% if gasolinera.rating is none %}
-            NO VALORADA
+              NO VALORADA
             {% else %}
-            {{ gasolinera.rating }}
+              <span>{{ gasolinera.rating }}</span>
             {% endif %}
-          </td>
+          </td>          
         </tr>
         {% endfor %}
       </tbody>
@@ -74,7 +74,6 @@
     {% endif %}
   </div>
   {% endif %}
-
 
 </body>
 

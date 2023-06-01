@@ -122,5 +122,23 @@ input[type="submit"]:hover {
 
 /* Estilos de las celdas de precios */
 .rotulo{
-    width: 30px;
+    width: 15vw;
+}
+
+.gasolina{
+  width: 7vw;
+}
+
+.municipio{
+  width: 6vw;
+}
+
+td.abierto {
+  color: green;
+  font-weight: bold;
+}
+
+.valoracion span:before {
+  content: "\2605";
+  margin-right: 3px;
 }
