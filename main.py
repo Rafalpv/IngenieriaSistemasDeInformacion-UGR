@@ -26,16 +26,17 @@ def hello_world():
 
 @app.route('/index.html')
 def index():
+    fechaPrecio = fecha()
     
     combustiblesEspaña = Combustible()
-    entidades = Entidad()
     preciosCombustiblesEspaña = combustiblesEspaña.getDatosCombustibles()
     
-    fechaPrecio = fecha()
+    entidades = Entidad()
     preciosEntidades = entidades.obtenerDatosEntidades()
     
     provincia = request.args.get('provincia')
     codPostal = request.args.get('codPostal')
+    tipoCombustible = request.args.get('tipoCombustible')
 
     gasolinerasFiltrada = Gasolinera()    
 
@@ -44,15 +45,16 @@ def index():
     else:
         gasolineras = gasolinerasFiltrada.getGasolinerasProvincia(provincia)
 
-    return render_template('index.html', preciosCombustibles_web=preciosCombustiblesEspaña, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades, provicinciasEspana_web=provincias_espana, gasolineras_web=gasolineras)
+    return render_template('index.html', preciosCombustibles_web=preciosCombustiblesEspaña, fechaPrecio_web=fechaPrecio, preciosEntidades_web=preciosEntidades, provicinciasEspana_web=provincias_espana, gasolineras_web=gasolineras,tipoCombustible_web=tipoCombustible)
 
 
 @app.route('/buscar_gasolineras', methods=['POST'])
 def buscarGasolinerasProvincias():
     provincia = request.form['provincia']
     codPostal = request.form['codPostal']
+    tipoCombustible = request.form['tipoCombustible']
 
-    return redirect(url_for('index', provincia=provincia, codPostal=codPostal))
+    return redirect(url_for('index', provincia=provincia, codPostal=codPostal, tipoCombustible=tipoCombustible))
 
 
 @app.route('/ciudades.html')

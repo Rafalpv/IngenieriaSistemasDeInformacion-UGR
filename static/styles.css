@@ -13,7 +13,7 @@ h3 {
 }
 
 .container {
-  max-width: 75%;
+  max-width: 80%;
   margin: 0 auto;
   padding: 10px;
   display: flex;
@@ -77,6 +77,7 @@ th {
 /* Estilos del formulario de búsqueda */
 form{
     text-align: center;
+    
 }
 
 .formularios {
@@ -126,7 +127,7 @@ input[type="submit"]:hover {
 }
 
 .gasolina{
-  width: 7vw;
+  width: 12vw;
 }
 
 .municipio{
@@ -141,4 +142,12 @@ td.abierto {
 .valoracion span:before {
   content: "\2605";
   margin-right: 3px;
+}
+
+#deposito{
+  width: 5vw;
+  padding: 7px 0 7px 0;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
 }

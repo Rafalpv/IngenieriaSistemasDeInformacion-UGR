@@ -18,7 +18,8 @@ def filtrarPorProvincia(provincia):
         "Provincia": element['Provincia'],
         "Precio Gasolina 95 E5":  element['Precio Gasolina 95 E5'],
         "Precio Gasolina 98 E5": element['Precio Gasolina 98 E5'],
-        "Precio Gasoleo A": element['Precio Gasoleo A']
+        "Precio Gasoleo A": element['Precio Gasoleo A'],
+        "Precio Gasoleo Premium": element['Precio Gasoleo Premium']
     }
     for element in filtered_data
 ]
@@ -38,7 +39,9 @@ def filtrarPorCodPostal(codPostal):
         "Provincia": element['Provincia'],
         "Precio Gasolina 95 E5":  element['Precio Gasolina 95 E5'],
         "Precio Gasolina 98 E5": element['Precio Gasolina 98 E5'],
-        "Precio Gasoleo A": element['Precio Gasoleo A']
+        "Precio Gasoleo A": element['Precio Gasoleo A'],
+        "Precio Gasoleo Premium": element['Precio Gasoleo Premium']
+        
     }
     for element in filtered_data
 ]
