@@ -1,17 +1,6 @@
+from classes.Combustible import Combustible
 from preciosAPI import *
 
-class Combustible:
-    def __init__(self, nombre, precio_litro_actual, precio_litro_pasado, precio_litro_maxHistorico):
-        self.nombre = nombre
-        self.precio_litro_actual = precio_litro_actual
-        self.precio_litro_pasado = precio_litro_pasado
-        self.precio_litro_maxHistorico = precio_litro_maxHistorico
-        
-class Entidad:
-    def __init__(self, combustibles, imagen_link):
-        self.combustibles = combustibles
-        self.imagen_link = imagen_link
-    
 class Gasolinera:
     def __init__(self, nombre=None, municipio=None, provincia=None, ubicacion=None, cod_postal=None, combustibles=None):
         self.nombre = nombre
@@ -58,17 +47,3 @@ class Gasolinera:
             gasolinerasProvincia.append(gasolinera)   
             
         return gasolinerasProvincia
-        
-        
-class Gasolinera_GoogleMaps:
-    def __init__(self,nombre,direccion,horario,rating):
-        self.nombre = nombre
-        self.direccion = direccion
-        self.horario = horario
-        self.rating = rating
-    
-class Ruta:
-    def __init__(self,ciudad_partida,ciudad_destino,gasolineras):
-        self.ciudad_partida = ciudad_partida
-        self.ciudad_destino = ciudad_destino
-        self.gasolineras = gasolineras

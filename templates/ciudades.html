@@ -29,7 +29,7 @@
     <br class="mensaje">{{mensaje_web}}</br>
   </div>
 
-  <h2>Gasolineras Encontradas</h2>
+  <h2>Gasolineras Encontradas entre {{rutaCiudades_web.ciudad_partida}} y {{rutaCiudades_web.ciudad_destino}}</h2>
   <div class="container">
     <table class="table-provincias">
       <thead>
@@ -41,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for gasolinera in gasolinerasRuta_web %}
+        {% for gasolinera in rutaCiudades_web.gasolineras %}
         <tr>
           <td>{{ gasolinera.nombre }}</td>
           <td>{{ gasolinera.direccion }}</td>
