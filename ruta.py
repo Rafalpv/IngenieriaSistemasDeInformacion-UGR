@@ -1,5 +1,7 @@
 import requests
 from geopy.geocoders import Nominatim
+from clases import Gasolinera_GoogleMaps
+
 
 def obtener_ruta(origin, destination, api_key):
     api_key = "AIzaSyAK1BA-W17qGtv78Y8UsjFkfPqcC3TUHvc"  # Tu API key de Google Maps
@@ -29,7 +31,7 @@ def obtener_ruta(origin, destination, api_key):
                 coordenadas = f"{start_location['lat']},{start_location['lng']}"
 
                 # Buscar gasolineras en las coordenadas del paso
-                buscar_gasolineras(coordenadas, api_key, gasolineras_encontradas)
+                buscar_gasolineras(coordenadas, api_key,gasolineras_encontradas)
 
             # Devolver las gasolineras encontradas
             return gasolineras_encontradas
@@ -42,7 +44,7 @@ def obtener_ruta(origin, destination, api_key):
 
 def buscar_gasolineras(coordenadas, api_key, gasolineras_encontradas):
     # Construye la URL de la solicitud de búsqueda
-    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={coordenadas}&radius=10000&type=gas_station&key={api_key}"
+    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={coordenadas}&radius=4500&type=gas_station&key={api_key}"
 
     # Realiza la solicitud HTTP
     response = requests.get(url)
@@ -58,22 +60,24 @@ def buscar_gasolineras(coordenadas, api_key, gasolineras_encontradas):
             for result in data["results"]:
                 nombre = result["name"]
                 direccion = result["vicinity"]
-                location = result['geometry']['location']
+                opening_hours = result.get(
+                    'opening_hours', {}).get('open_now', None)
+                rating = result.get('rating', None)
 
-                # Convierte la ubicación en una tupla de coordenadas
-                coordenadas_tupla = (location['lat'], location['lng'], nombre, direccion)
-
-                # Verifica si la gasolinera ya se encontró anteriormente
-                if coordenadas_tupla not in gasolineras_encontradas:
-                    gasolineras_encontradas.add(coordenadas_tupla)
+                gasolinera = Gasolinera_GoogleMaps(nombre, direccion, opening_hours, rating)
+                gasolinera_existente = next(
+                    (g for g in gasolineras_encontradas if g.nombre == gasolinera.nombre and g.direccion == gasolinera.direccion), None)
+                if gasolinera_existente is None:
+                    gasolineras_encontradas.add(gasolinera)
     else:
         # Ocurrió un error al realizar la solicitud
         print("Error en la solicitud:", response.status_code)
 
-def getGasolinras(origen,destino):
-    
+
+def getGasolineras(origen, destino):
+
     api_key = "AIzaSyAK1BA-W17qGtv78Y8UsjFkfPqcC3TUHvc"  # Tu API key de Google Maps
-    
+
     geolocator = Nominatim(user_agent="my-app")
     city1 = origen
     location1 = geolocator.geocode(city1)
@@ -84,7 +88,8 @@ def getGasolinras(origen,destino):
     location2 = geolocator.geocode(city2)
     latitude2, longitude2 = location2.latitude, location2.longitude
     coords_destino = str(latitude2)+","+str(longitude2)
-    
-    gasolineras_encontrada = obtener_ruta(cords_origen,coords_destino,api_key)
-    
-    return gasolineras_encontrada
+
+    gasolineras_encontradas = obtener_ruta(
+        cords_origen, coords_destino, api_key)
+
+    return gasolineras_encontradas

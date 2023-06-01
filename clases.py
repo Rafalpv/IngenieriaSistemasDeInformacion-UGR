@@ -17,6 +17,13 @@ class Gasolinera:
         self.cod_postal = cod_postal
         self.ubicacion = ubicacion
         self.combustibles = combustibles
+        
+class Gasolinera_GoogleMaps:
+    def __init__(self,nombre,direccion,horario,rating):
+        self.nombre = nombre
+        self.direccion = direccion
+        self.horario = horario
+        self.rating = rating
     
 class Ruta:
     def __init__(self,ciudad_partida,ciudad_destino,gasolineras):

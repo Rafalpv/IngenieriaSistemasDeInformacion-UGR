@@ -30,11 +30,42 @@
   </div>
 
   <h2>Gasolineras Encontradas</h2>
-  <ul>
-
-    <p>{{gasolineras_web}}</p>
-
-  </ul>
+  <div class="container">
+    <table class="table-provincias">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Horario</th>
+          <th>Valoración</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for gasolinera in gasolinerasRuta_web %}
+        <tr>
+          <td>{{ gasolinera.nombre }}</td>
+          <td>{{ gasolinera.direccion }}</td>
+          <td>
+            {% if gasolinera.horario is none %}
+            SIN INFORMACIÓN
+            {% elif gasolinera.horario %}
+            ABIERTO
+            {% else %}
+            CERRADO
+            {% endif %}
+          </td>
+          <td>
+            {% if gasolinera.rating is none %}
+            NO VALORADA
+            {% else %}
+            {{ gasolinera.rating }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
