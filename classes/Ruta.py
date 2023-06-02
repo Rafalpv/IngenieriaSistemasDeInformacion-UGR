@@ -1,5 +1,5 @@
 from classes.GasolineraGM import GasolineraGM
-from distancias import * 
+from data.distancias import * 
 
 class Ruta:
     def __init__(self,ciudad_partida=None,ciudad_destino=None,gasolineras=None):

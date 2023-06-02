@@ -1,5 +1,5 @@
 from geopy.geocoders import Nominatim
-from ruta import obtener_ruta
+from data.ruta import obtener_ruta
 
 class GasolineraGM:
     def __init__(self,nombre=None,direccion=None,horario=None,rating=None):

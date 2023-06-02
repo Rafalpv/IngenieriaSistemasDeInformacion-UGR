@@ -1,4 +1,4 @@
-from dieselGasolina import *
+from data.dieselGasolina import *
 
 class Combustible:
     def __init__(self, nombre=None, precio_litro_actual=None, precio_litro_pasado=None, precio_litro_maxHistorico=None):

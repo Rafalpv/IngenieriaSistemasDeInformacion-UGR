@@ -1,4 +1,4 @@
-from dieselGasolina import *
+from data.dieselGasolina import *
 from classes.Combustible import Combustible
 
 class Entidad:

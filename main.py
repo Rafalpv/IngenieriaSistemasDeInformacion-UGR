@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, request
-from dieselGasolina import fecha
+from data.dieselGasolina import fecha
 
 from classes.Combustible import Combustible
 from classes.Gasolinera import Gasolinera

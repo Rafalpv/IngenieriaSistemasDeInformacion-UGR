@@ -1,5 +1,5 @@
 from classes.Combustible import Combustible
-from preciosAPI import *
+from data.preciosAPI import *
 
 class Gasolinera:
     def __init__(self, nombre=None, municipio=None, provincia=None, ubicacion=None, cod_postal=None, combustibles=None):
